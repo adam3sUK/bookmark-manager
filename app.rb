@@ -14,6 +14,16 @@ class BookmarkManager < Sinatra::Base
     'Hello World'
   end
 
+  get ('/create') do
+    erb :create
+  end
+
+  post ('/new_bookmark') do
+    url = params['url']
+    Bookmark.create(url: params[:url])
+    redirect '/bookmarks'
+  end
+
   get ('/bookmarks') do
     @bookmarks = Bookmark.all
     erb :bookmarks
